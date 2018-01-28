@@ -26,100 +26,83 @@ public class HomeController {
 	private static final String HOME_PAGE = "index";
 
 	/**
-	 * Shows the home page.
+	 * Shows the appointment page.
 	 *
-	 * @param model the model
+	 * @param model
+	 *            the model
 	 * @return the page view
 	 */
 	@GetMapping(value = "/")
 	public String home(final Model model) {
 		HOME_LOGGER.info("Going to home page");
-		//The front-end needs a new Appointment object to read from input fields for appointments.
+		// The front-end needs a new Appointment object to read from input fields for
+		// appointments.
 		model.addAttribute("appointment", new Appointment());
 		return HOME_PAGE;
 	}
 
-    /**
-     * The get appointments controller
-     *
-     * @return the string
-     * @throws IOException
-     */
+	/**
+	 * GET Controller for getting all appointments if search string is empty.
+	 * If Search parameter is used, then gets the appointments
+	 *
+	 * @param model the model
+	 * @param searchString the search string
+	 * @return the appointments
+	 */
 	@GetMapping(path = "/appointments.pl")
 	@ResponseBody
-    public String getAppointments(Model model, @RequestParam("searchString") String searchString) throws IOException {
-		HOME_LOGGER.info("Going to the appointment");
-		HOME_LOGGER.info("searchString: " + searchString);
-	    model.addAttribute("appointment", new Appointment());
-		String perlScript = "C:\\Perl64\\bin\\perl.exe C:\\\\Users\\\\Eric\\\\eclipse-workspace\\\\SpringBootAppointments\\\\src\\\\main\\\\resources\\\\static\\\\pl\\\\appointments.pl " +
-				searchString;
-		Process process = Runtime.getRuntime().exec(perlScript);
-		HOME_LOGGER.info("process.getInputStream():" + process.getInputStream());
-		HOME_LOGGER.info("process.getOutputStream():" + process.getOutputStream());
+	public String getAppointments(Model model, @RequestParam("searchString") String searchString) {
+		HOME_LOGGER.info("Retrieving all apointments");
+		model.addAttribute("appointment", new Appointment());
+		String perlScript = "C:\\Perl64\\bin\\perl.exe C:\\\\Users\\\\Eric\\\\eclipse-workspace\\\\SpringBootAppointments\\\\src\\\\main\\\\resources\\\\static\\\\pl\\\\appointments.pl "
+				+ searchString;
+		Process process;
+		String appointmentJSON = StringUtils.EMPTY;
 
-		BufferedReader stdInput = new BufferedReader(new
-			     InputStreamReader(process.getInputStream()));
+		try {
+			process = Runtime.getRuntime().exec(perlScript);
 
-			String line = "";
+		//Reading appointment JSON from PERL script and outputting to the view.
+		BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
+		String line = StringUtils.EMPTY;
 
-			// read the output from the command
-			System.out.println("EXE OUTPUT");
-			String appointmentJSON = "";
-
-
-			while ((line = stdInput.readLine()) != null) {
-				HOME_LOGGER.info("row: " + line);
-				if(line != null) {
-					appointmentJSON = line;
-				}
+		while ((line = stdInput.readLine()) != null) {
+			HOME_LOGGER.info("row: " + line);
+			if (line != null) {
+				appointmentJSON = line;
 			}
+		}
+		} catch (IOException e) {
+			HOME_LOGGER.warn("Unable to get all appointment");
+		}
 
-			HOME_LOGGER.info("line: " + appointmentJSON);
-			//String appointmentJSON = stdInput.readLine();
+		//Return emptyString is appointmentJSON is null or empty.
+		if (StringUtils.isBlank(StringUtils.trim(appointmentJSON))) {
+			appointmentJSON = StringUtils.EMPTY;
+		}
 
-			if(appointmentJSON == null ||
-					StringUtils.trim(appointmentJSON).equals(StringUtils.EMPTY)) {
-				appointmentJSON = StringUtils.EMPTY;
-			}
-			HOME_LOGGER.info("appointmentJSON: " + appointmentJSON);
-
-			return appointmentJSON;
+		return appointmentJSON;
 	}
 
 	/**
-	 * The new appointment POST controller
+	 * The POST controller for adding a new appointment.
 	 *
-	 * @param appointment the appointment
+	 * @param appointment
+	 *            the appointment
 	 * @return the home page
-	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@PostMapping("/newAppointment.pl")
-    public String index2(@ModelAttribute Appointment appointment) throws IOException {
-		HOME_LOGGER.info("Going to the appointment");
-		HOME_LOGGER.info("appointment.getAppointmentDate(): " + appointment.getAppointmentDate());
-		HOME_LOGGER.info("appointment.getAppointmentTime(): " + appointment.getAppointmentTime());
-		HOME_LOGGER.info("appointment.getDescription():" + appointment.getDescription());
-		String perlScript = "C:\\Perl64\\bin\\perl.exe C:\\\\Users\\\\Eric\\\\eclipse-workspace\\\\SpringBootAppointments\\\\src\\\\main\\\\resources\\\\static\\\\pl\\\\newAppointments.pl " +
-				appointment.getAppointmentDate() + " " + appointment.getAppointmentTime() + " " + appointment.getDescription();
-		HOME_LOGGER.info("perlScript: " + perlScript);
+	public String index2(@ModelAttribute Appointment appointment) {
+		HOME_LOGGER.info("Add a new appointment");
+		String perlScript = "C:\\Perl64\\bin\\perl.exe C:\\\\Users\\\\Eric\\\\eclipse-workspace\\\\SpringBootAppointments\\\\src\\\\main\\\\resources\\\\static\\\\pl\\\\newAppointments.pl "
+				+ appointment.getAppointmentDate() + " " + appointment.getAppointmentTime() + " "
+				+ appointment.getDescription();
+		try {
+			Runtime.getRuntime().exec(perlScript);
+		} catch (IOException e) {
+			HOME_LOGGER.warn("Unable to add appointment");
+		}
 
-		Process process = Runtime.getRuntime().exec(perlScript);
-		HOME_LOGGER.info("process.getInputStream():" + process.getInputStream());
-		HOME_LOGGER.info("process.getOutputStream():" + process.getOutputStream());
-		BufferedReader stdInput = new BufferedReader(new
-			     InputStreamReader(process.getInputStream()));
-
-			String line = "";
-
-			// read the output from the command
-			System.out.println("EXE OUTPUT");
-			while ((line = stdInput.readLine()) != null) {
-				HOME_LOGGER.info("row: " + line);
-			}
-		appointment.setAppointmentDate("");
-		appointment.setAppointmentTime("");
-		appointment.setDescription("");
-
-        return "redirect:/";
-    }
+		return "redirect:/";
+	}
 }

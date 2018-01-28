@@ -57,11 +57,9 @@ function getAppointments(searchString) {
 
 						var tableEnder = "</tbody></table>";
 
+						//Composing all HTML component of appointment table.
 						var appointmentTableOutput = tableHeader + tableFullRow
 								+ tableEnder;
-						console.log(tableHeader);
-						console.log(tableFullRow);
-						console.log(tableEnder);
 
 						// Adding appointment table to HTML page.
 						$("#appointmentTable").append(appointmentTableOutput);

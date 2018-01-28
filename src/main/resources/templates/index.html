@@ -22,7 +22,7 @@
 		<div class="row">
 			<div class="col-md-4">
 				<!--  Appointment header -->
-	            <h1 id="appointmentHeader">Appointments Page</h1>
+				<h1 id="appointmentHeader">Appointments Page</h1>
 				<form action="/newAppointment.pl" th:object="${appointment}"
 					onsubmit="return newAppointment()" method="post">
 					<div id="newButtonDiv" class="col-md-4">
@@ -47,15 +47,17 @@
 	<!-- Search appointment section -->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group">
-					<label for="usr">Search:</label> <input id="searchText" type="text"
-						class="form-control" />
+			<div id="searchContentDiv">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="usr">Search:</label> <input id="searchText"
+							type="text" class="form-control" />
+					</div>
 				</div>
-			</div>
-			<div id="searchButtonDiv" class="col-md-4">
-				<span class="pull-left"><button id="searchButton"
-						type="button" class="btn btn-info">Search</button> </span>
+				<div id="searchButtonDiv" class="col-md-4">
+					<span class="pull-left"><button id="searchButton"
+							type="button" class="btn btn-info">Search</button> </span>
+				</div>
 			</div>
 		</div>
 	</div>

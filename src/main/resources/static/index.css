@@ -8,10 +8,18 @@
 
 #newButtonDiv {
 	padding-left: 0px;
+	padding-bottom: 10px;
+    padding-top: 30px;
+}
+
+#searchContentDiv {
+	padding-left: 0px;
+	padding-bottom: 90px;
+    padding-top: 20px;
 }
 
 #searchButton {
-	margin-top:20px;
+	margin-top:5px;
 }
 
 body {
@@ -23,5 +31,7 @@ table,td,th,tbody,thead{
 }
 
 #appointmentHeader {
-    text-align: center;
+  position: relative;
+  left: 125%;
+  padding-top:10px;
 }
