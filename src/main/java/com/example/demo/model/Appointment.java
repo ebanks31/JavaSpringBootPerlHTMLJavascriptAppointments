@@ -1,9 +1,7 @@
 package com.example.demo.model;
 
-import java.util.Date;
-
 /**
- * The Class Appointment.
+ * This class holds the appointment object.
  */
 public class Appointment {
 
@@ -28,7 +26,8 @@ public class Appointment {
 	/**
 	 * Sets the appointment date.
 	 *
-	 * @param appointmentDate the new appointment date
+	 * @param appointmentDate
+	 *            the new appointment date
 	 */
 	public void setAppointmentDate(String appointmentDate) {
 		this.appointmentDate = appointmentDate;
@@ -46,7 +45,8 @@ public class Appointment {
 	/**
 	 * Sets the appointment time.
 	 *
-	 * @param appointmentTime the new appointment time
+	 * @param appointmentTime
+	 *            the new appointment time
 	 */
 	public void setAppointmentTime(String appointmentTime) {
 		this.appointmentTime = appointmentTime;
@@ -64,7 +64,8 @@ public class Appointment {
 	/**
 	 * Sets the description.
 	 *
-	 * @param description the new description
+	 * @param description
+	 *            the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;

@@ -33,7 +33,7 @@ public class HomeController {
 	 * @return the page view
 	 */
 	@GetMapping(value = "/")
-	public String home(final Model model) {
+	public String retrieveHomePage(final Model model) {
 		HOME_LOGGER.info("Going to home page");
 		// The front-end needs a new Appointment object to read from input fields for
 		// appointments.
@@ -42,12 +42,16 @@ public class HomeController {
 	}
 
 	/**
-	 * GET Controller for getting all appointments if search string is empty.
-	 * If Search parameter is used, then gets the appointments
+	 * GET Controller for getting all appointments if search string is empty. If
+	 * Search parameter is used, then get appointments
+	 * only if description column contain search string parameter
 	 *
-	 * @param model the model
-	 * @param searchString the search string
-	 * @return the appointments
+	 * @param model
+	 *            the model
+	 * @param searchString
+	 *            the search string
+	 * @return all appointments if search string is empty or null,
+	 * Otherwise get appointments only if description column contain search string parameter.
 	 */
 	@GetMapping(path = "/appointments.pl")
 	@ResponseBody
@@ -60,23 +64,24 @@ public class HomeController {
 		String appointmentJSON = StringUtils.EMPTY;
 
 		try {
+			//Executing PERL script for retrieving all appointments
 			process = Runtime.getRuntime().exec(perlScript);
 
-		//Reading appointment JSON from PERL script and outputting to the view.
-		BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
-		String line = StringUtils.EMPTY;
+			// Reading appointment JSON from PERL script and outputting to the view.
+			BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			String line = StringUtils.EMPTY;
 
-		while ((line = stdInput.readLine()) != null) {
-			HOME_LOGGER.info("row: " + line);
-			if (line != null) {
-				appointmentJSON = line;
+			while ((line = stdInput.readLine()) != null) {
+				HOME_LOGGER.info("row: " + line);
+				if (line != null) {
+					appointmentJSON = line;
+				}
 			}
-		}
 		} catch (IOException e) {
 			HOME_LOGGER.warn("Unable to get all appointment");
 		}
 
-		//Return emptyString is appointmentJSON is null or empty.
+		// Return emptyString is appointmentJSON is null or empty.
 		if (StringUtils.isBlank(StringUtils.trim(appointmentJSON))) {
 			appointmentJSON = StringUtils.EMPTY;
 		}
@@ -92,12 +97,13 @@ public class HomeController {
 	 * @return the home page
 	 */
 	@PostMapping("/newAppointment.pl")
-	public String index2(@ModelAttribute Appointment appointment) {
+	public String addNewAppointment(@ModelAttribute Appointment appointment) {
 		HOME_LOGGER.info("Add a new appointment");
 		String perlScript = "C:\\Perl64\\bin\\perl.exe C:\\\\Users\\\\Eric\\\\eclipse-workspace\\\\SpringBootAppointments\\\\src\\\\main\\\\resources\\\\static\\\\pl\\\\newAppointments.pl "
 				+ appointment.getAppointmentDate() + " " + appointment.getAppointmentTime() + " "
 				+ appointment.getDescription();
 		try {
+			//Executing PERL script for adding a new appointment
 			Runtime.getRuntime().exec(perlScript);
 		} catch (IOException e) {
 			HOME_LOGGER.warn("Unable to add appointment");
