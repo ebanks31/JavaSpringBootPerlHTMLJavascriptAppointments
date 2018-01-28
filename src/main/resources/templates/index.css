@@ -1,0 +1,24 @@
+#searchButtonDiv {
+	margin-top:20px;
+}
+
+#inputFields {
+	display:none;
+}
+
+#newButtonDiv {
+	margin-right:20px;
+}
+
+body {
+	background-color: lightblue;
+}
+
+#appointmentHeader {
+	text-align: center;
+	margin-top:20px;
+}
+
+table,td,th,tbody,thead{
+    border:1px solid black;
+}
