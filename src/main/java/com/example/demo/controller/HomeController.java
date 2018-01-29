@@ -78,7 +78,7 @@ public class HomeController {
 				}
 			}
 		} catch (IOException e) {
-			HOME_LOGGER.warn("Unable to get all appointment");
+			HOME_LOGGER.warn("Unable to get all appointments");
 		}
 
 		// Return emptyString is appointmentJSON is null or empty.
@@ -96,12 +96,11 @@ public class HomeController {
 	 *            the appointment
 	 * @return the home page
 	 */
-	@PostMapping("/newAppointment1.pl")
+	@PostMapping("/newAppointment.pl")
 	public String addNewAppointment(@ModelAttribute Appointment appointment) {
-		HOME_LOGGER.info("Add a new appointment");
-		String perlScript = "C:\\Perl64\\bin\\perl.exe C:\\\\Users\\\\Eric\\\\eclipse-workspace\\\\SpringBootAppointments\\\\src\\\\main\\\\resources\\\\static\\\\pl\\\\newAppointments.pl "
-				+ appointment.getAppointmentDate() + " " + appointment.getAppointmentTime() + " "
-				+ appointment.getDescription();
+		HOME_LOGGER.info("Adds a new appointment");
+		String perlScript = "C:\\Perl64\\bin\\perl.exe C:\\\\Users\\\\Eric\\\\eclipse-workspace\\\\SpringBootAppointments\\\\src\\\\main\\\\resources\\\\static\\\\pl\\\\newAppointments.pl " +
+				appointment.getAppointmentDate() + " " + appointment.getAppointmentTime() + " " + appointment.getDescription();
 		try {
 			//Executing PERL script for adding a new appointment
 			Runtime.getRuntime().exec(perlScript);
