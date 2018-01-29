@@ -1,0 +1,17 @@
+CREATE TABLE APPOINTMENTS (
+   Id INTEGER PRIMARY KEY  AUTOINCREMENT,
+   appointmentTime           DATETIME,
+   Description            CHAR(500)  
+);
+
+INSERT INTO APPOINTMENTS (ID, appointmentTime, description) 
+VALUES (1, '2007-01-01 10:00:00','Test');
+
+INSERT INTO APPOINTMENTS (appointmentTime, description) 
+VALUES ('2007-01-01 10:00:00','Test');
+
+INSERT INTO APPOINTMENTS (appointmentTime, description) 
+VALUES ('2007-01-01 10:00:00','est');
+
+INSERT INTO APPOINTMENTS (appointmentTime, description) 
+VALUES ('2007-01-01 10:00:00','rrr');
