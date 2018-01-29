@@ -19,11 +19,12 @@ my $appointmentDate = $ARGV[0];
 my $appointmentTime = $ARGV[1];
 my $description = $ARGV[2];
 
-my $appointmentDateTime = $appointmentDate . $appointmentTime;
+my $appointmentDateTime = $appointmentDate . " " . $appointmentTime;
+my $sth;
 
 ## Only insert appointsments if there is not an empty appointment date/time and description.
 if ($appointmentDateTime ne "" && $description ne "") {
-	my $sth = $dbh->prepare('INSERT INTO APPOINTMENTS(appointmentTime, description) VALUES (?, ?)');
+	$sth = $dbh->prepare('INSERT INTO APPOINTMENTS(appointmentTime, description) VALUES (?, ?)');
 	$sth->execute($appointmentDateTime, $description);
 }
 

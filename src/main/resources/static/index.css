@@ -2,11 +2,18 @@
 	margin-top:20px;
 }
 
-#inputFields {
+#cancelButton {
 	display:none;
+	margin-left:20px;
+	padding-right: 55px;
 }
 
-#newButtonDiv {
+#inputFields {
+	display:none;
+	padding-top: 20px;
+}
+
+#newCancelButtonDiv {
 	padding-left: 0px;
 	padding-bottom: 10px;
     padding-top: 30px;

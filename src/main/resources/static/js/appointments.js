@@ -10,6 +10,7 @@ $(document).ready(function() {
 	$("#cancelButton").click(function() {
 		$("#newButton").val("New");
 		$("#inputFields").hide();
+		$("#cancelButton").hide();
 	});
 });
 
@@ -82,6 +83,7 @@ function newAppointment() {
 		event.stopPropagation();
 		$("#newButton").val("Add");
 		$("#inputFields").show();
+		$("#cancelButton").show();
 		return false;
 
 	} else {

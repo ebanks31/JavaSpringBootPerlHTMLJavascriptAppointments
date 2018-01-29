@@ -96,7 +96,7 @@ public class HomeController {
 	 *            the appointment
 	 * @return the home page
 	 */
-	@PostMapping("/newAppointment.pl")
+	@PostMapping("/newAppointment1.pl")
 	public String addNewAppointment(@ModelAttribute Appointment appointment) {
 		HOME_LOGGER.info("Add a new appointment");
 		String perlScript = "C:\\Perl64\\bin\\perl.exe C:\\\\Users\\\\Eric\\\\eclipse-workspace\\\\SpringBootAppointments\\\\src\\\\main\\\\resources\\\\static\\\\pl\\\\newAppointments.pl "
@@ -111,4 +111,41 @@ public class HomeController {
 
 		return "redirect:/";
 	}
+
+	/**
+	 * The new appointment POST controller
+	 *
+	 * @param appointment the appointment
+	 * @return the home page
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	@PostMapping("/newAppointment.pl")
+    public String index2(@ModelAttribute Appointment appointment) throws IOException {
+		HOME_LOGGER.info("Going to the appointment");
+		HOME_LOGGER.info("appointment.getAppointmentDate(): " + appointment.getAppointmentDate());
+		HOME_LOGGER.info("appointment.getAppointmentTime(): " + appointment.getAppointmentTime());
+		HOME_LOGGER.info("appointment.getDescription():" + appointment.getDescription());
+		String perlScript = "C:\\Perl64\\bin\\perl.exe C:\\\\Users\\\\Eric\\\\eclipse-workspace\\\\SpringBootAppointments\\\\src\\\\main\\\\resources\\\\static\\\\pl\\\\newAppointments.pl " +
+				appointment.getAppointmentDate() + " " + appointment.getAppointmentTime() + " " + appointment.getDescription();
+		HOME_LOGGER.info("perlScript: " + perlScript);
+
+		Process process = Runtime.getRuntime().exec(perlScript);
+		HOME_LOGGER.info("process.getInputStream():" + process.getInputStream());
+		HOME_LOGGER.info("process.getOutputStream():" + process.getOutputStream());
+		BufferedReader stdInput = new BufferedReader(new
+			     InputStreamReader(process.getInputStream()));
+
+			String line = "";
+
+			// read the output from the command
+			System.out.println("EXE OUTPUT");
+			while ((line = stdInput.readLine()) != null) {
+				HOME_LOGGER.info("row: " + line);
+			}
+		appointment.setAppointmentDate("");
+		appointment.setAppointmentTime("");
+		appointment.setDescription("");
+
+        return "redirect:/";
+    }
 }
