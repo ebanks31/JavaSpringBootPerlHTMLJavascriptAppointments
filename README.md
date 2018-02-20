@@ -6,12 +6,14 @@ This project can be used by clone the git repository.
 git clone https://github.com/ebanks31/PerlHTMLJavascriptAppointments.git
 Change to this project's main directory.
 Run command mvn spring-boot:run
+You can access the main application by going to http://localhost:8080/ on your web browser.
 
 
 This project uses SQLLite which can be downloaded from here.
 https://www.sqlite.org/
 
 **Folder locations**
+
 Java Classes are located here.
 https://github.com/ebanks31/PerlHTMLJavascriptAppointments/tree/master/src/main/java/com/example/demo
 
@@ -23,7 +25,8 @@ Static file(css, JavaScript. are located in the static folder.
 The classes in the PERL script.
 
 **Replacement values that should be used**
-There are some values that must be replaced to use this project successfully. 
+
+There are some values that must be replaced to use this project successfully.
 
 The perl command string must be replaced with absolute path for the getAppointment method and addNewAppointment
 method in the HomeController.
@@ -41,3 +44,8 @@ https://github.com/ebanks31/PerlHTMLJavascriptAppointments/tree/master/src/main/
 
 Sample sql scripts can be located here.
 https://github.com/ebanks31/PerlHTMLJavascriptAppointments/tree/master/sql
+
+
+**Swagger API Documentation**
+
+You can access swagger API documentation by going to http://localhost:8080/swagger-ui.html on your web browser.
