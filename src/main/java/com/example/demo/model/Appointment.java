@@ -1,18 +1,51 @@
 package com.example.demo.model;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * This class holds the appointment object.
  */
 public class Appointment {
 
 	/** The appointment date. */
+    @NotNull
+    @NotEmpty
+    @Valid
 	private String appointmentDate;
 
 	/** The appointment time. */
+    @NotNull
+    @NotEmpty
+    @Valid
 	private String appointmentTime;
 
 	/** The description. */
+    @NotNull
 	private String description;
+
+	/** The message. */
+	private String message;
+
+	/**
+	 * Gets the message.
+	 *
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+
+	/**
+	 * Sets the message.
+	 *
+	 * @param message the new message
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	/**
 	 * Gets the appointment date.

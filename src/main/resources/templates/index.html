@@ -23,7 +23,7 @@
 			<div class="col-md-4">
 				<!--  Appointment header -->
 				<h1 id="appointmentHeader">Appointments Page</h1>
-				<form action="/newAppointment.pl" th:object="${appointment}"
+				<form action="/newAppointment" th:object="${appointment}"
 					onsubmit="return newAppointment()" method="post">
 					<div id="#newCancelButtonDiv" class="clearfix">
 						<input id="newButton" type="submit" class="btn btn-primary col-md-2 clearfix" value="New" />

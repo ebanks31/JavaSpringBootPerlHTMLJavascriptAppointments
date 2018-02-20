@@ -21,7 +21,7 @@ function getAppointments(searchString) {
 		 // Getting appointment page based on search parameters.
 	     $.ajax({
 				type : 'GET',
-				url : '/appointments.pl',
+				url : '/appointments',
 				data : {
 					"searchString" : searchString.trim()
 				},
@@ -79,8 +79,10 @@ function getAppointments(searchString) {
 }
 
 function newAppointment() {
-	if ($("#newButton").val() === 'New') {
+	if ($("#newButton").val() === 'New') {\
+		//Stop the submission to new page.
 		event.stopPropagation();
+
 		$("#newButton").val("Add");
 		$("#inputFields").show();
 		$("#cancelButton").show();

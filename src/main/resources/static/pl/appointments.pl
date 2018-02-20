@@ -24,10 +24,10 @@ my $searchString = $ARGV[0];
 #if searchString is found in arguments then search any appointments that contains the search string.
 #Otherwise  get all appointments.
 if ($searchString eq "") {
-  $sth = $dbh->prepare('SELECT appointmentTime, Description FROM APPOINTMENTS');
+  $sth = $dbh->prepare('SELECT DISTINCT appointmentTime, Description FROM APPOINTMENTS');
   $sth->execute;
 } else {
-  $sth = $dbh->prepare('SELECT appointmentTime, Description FROM APPOINTMENTS where Description LIKE ?');
+  $sth = $dbh->prepare('SELECT DISTINCT appointmentTime, Description FROM APPOINTMENTS where Description LIKE ?');
   $sth->execute("%" . $searchString . "%");
 }
 
