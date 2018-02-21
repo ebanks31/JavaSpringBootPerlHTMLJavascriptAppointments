@@ -11,19 +11,19 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Appointment {
 
 	/** The appointment date. */
-    @NotNull
-    @NotEmpty
-    @Valid
+	@NotNull
+	@NotEmpty
+	@Valid
 	private String appointmentDate;
 
 	/** The appointment time. */
-    @NotNull
-    @NotEmpty
-    @Valid
+	@NotNull
+	@NotEmpty
+	@Valid
 	private String appointmentTime;
 
 	/** The description. */
-    @NotNull
+	@NotNull
 	private String description;
 
 	/** The message. */
@@ -41,7 +41,8 @@ public class Appointment {
 	/**
 	 * Sets the message.
 	 *
-	 * @param message the new message
+	 * @param message
+	 *            the new message
 	 */
 	public void setMessage(String message) {
 		this.message = message;

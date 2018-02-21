@@ -49,3 +49,7 @@ https://github.com/ebanks31/PerlHTMLJavascriptAppointments/tree/master/sql
 **Swagger API Documentation**
 
 You can access swagger API documentation by going to http://localhost:8080/swagger-ui.html on your web browser.
+
+**Test Cases**
+
+Test cases are located in the Test Cases folder that are located in the root folder of this project.
