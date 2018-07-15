@@ -44,8 +44,7 @@ public class HomeController {
 	/**
 	 * Shows the appointment page.
 	 *
-	 * @param model
-	 *            the model
+	 * @param model the model
 	 * @return the page view
 	 */
 	@GetMapping(value = "/")
@@ -67,10 +66,8 @@ public class HomeController {
 	 * Search parameter is used, then get appointments only if description column
 	 * contain search string parameter. This method returns a response body.
 	 *
-	 * @param model
-	 *            the model
-	 * @param searchString
-	 *            the search string
+	 * @param model        the model
+	 * @param searchString the search string
 	 * @return all appointments if search string is empty or null, Otherwise get
 	 *         appointments only if description column contain search string
 	 *         parameter.
@@ -96,7 +93,7 @@ public class HomeController {
 
 			// Reading appointment JSON from PERL script and outputting to the view.
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			String line = StringUtils.EMPTY;
+			String line;
 
 			while ((line = stdInput.readLine()) != null) {
 				HOME_LOGGER.info("row: " + line);
@@ -121,12 +118,9 @@ public class HomeController {
 	 * Search parameter is used, then get appointments only if description column
 	 * contain search string parameter This method returns a response entity.
 	 *
-	 * @param model
-	 *            the model
-	 * @param searchString
-	 *            the search string
-	 * @param errors
-	 *            the errors
+	 * @param model        the model
+	 * @param searchString the search string
+	 * @param errors       the errors
 	 * @return all appointments if search string is empty or null, Otherwise get
 	 *         appointments only if description column contain search string
 	 *         parameter.
@@ -152,7 +146,7 @@ public class HomeController {
 
 			// Reading appointment JSON from PERL script and outputting to the view.
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			String line = StringUtils.EMPTY;
+			String line;
 
 			while ((line = stdInput.readLine()) != null) {
 				HOME_LOGGER.info("row: " + line);
@@ -160,7 +154,7 @@ public class HomeController {
 			}
 		} catch (IOException e) {
 			HOME_LOGGER.warn("Unable to get all appointments");
-			return new ResponseEntity<String>(StringUtils.EMPTY, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(StringUtils.EMPTY, HttpStatus.NO_CONTENT);
 		}
 
 		// Return emptyString is appointmentJSON is null or empty.
@@ -170,14 +164,13 @@ public class HomeController {
 		// HttpHeaders headers = new HttpHeaders();
 		// headers.add("Content-Type", "application/json");
 
-		return new ResponseEntity<String>(appointmentJSON, HttpStatus.OK);
+		return new ResponseEntity<>(appointmentJSON, HttpStatus.OK);
 	}
 
 	/**
 	 * The POST controller for adding a new appointment.
 	 *
-	 * @param appointment
-	 *            the appointment
+	 * @param appointment the appointment
 	 * @return the home page
 	 */
 	@PostMapping("/newAppointment")

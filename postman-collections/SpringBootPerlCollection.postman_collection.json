@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "6501a6e5-3556-ed40-98f7-53b8077d534c",
+		"name": "SpringBootPerlCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getHomePage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/newAppointment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"newAppointment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addNewAppointments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/newAppointment?appointmentDate=\"333\"&appointmentTime=\"11\"&description=\"Test\"",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"newAppointment"
+					],
+					"query": [
+						{
+							"key": "appointmentDate",
+							"value": "\"333\""
+						},
+						{
+							"key": "appointmentTime",
+							"value": "\"11\""
+						},
+						{
+							"key": "description",
+							"value": "\"Test\""
+						},
+						{
+							"key": null,
+							"value": null
+						},
+						{
+							"key": null,
+							"value": null
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "025c1fb5-c25e-420b-ac89-e2e15553ce2f",
+					"name": "addNewAppointments",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/newAppointment?appointmentDate=\"333\"&appointmentTime=\"11\"&description=\"Test\"",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"newAppointment"
+							],
+							"query": [
+								{
+									"key": "appointmentDate",
+									"value": "\"333\""
+								},
+								{
+									"key": "appointmentTime",
+									"value": "\"11\""
+								},
+								{
+									"key": "description",
+									"value": "\"Test\""
+								},
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Content-Language",
+							"value": "en-US",
+							"name": "Content-Language",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html;charset=UTF-8",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Feb 2018 02:14:49 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						},
+						{
+							"key": "X-Application-Context",
+							"value": "application",
+							"name": "X-Application-Context",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"body": "<!DOCTYPE html>\n\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:sec=\"http://www.thymeleaf.org/thymeleaf-extras-springsecurity3\">\n\n<!-- Header section -->\n<head>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"index.css\" media=\"screen\" />\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>\n<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>\n<script type=\"text/javascript\" src=\"/js/appointments.js\"></script>\n</head>\n<body>\n  <!-- New/add appointment section -->\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-md-4\">\n        <!--  Appointment header -->\n        <h1 id=\"appointmentHeader\">Appointments Page</h1>\n        <form action=\"/newAppointment\" onsubmit=\"return newAppointment()\" method=\"post\">\n          <div id=\"#newCancelButtonDiv\" class=\"clearfix\">\n            <input id=\"newButton\" type=\"submit\" class=\"btn btn-primary col-md-2 clearfix\" value=\"New\" />\n            <button id=\"cancelButton\" type=\"button\" class=\"btn btn-danger col-md-2 pull-left clearfix\">Cancel</button>\n          </div>\n          <div id=\"inputFields\">\n                <label for=\"date\">Date:</label>\n                <input id=\"appointmentDate\" type=\"text\" class=\"form-control\" name=\"appointmentDate\" value=\"\" />\n                <label for=\"time\">Time:</label>\n                <input id=\"appointmentTime\" type=\"text\" class=\"form-control\" name=\"appointmentTime\" value=\"\" />\n                <label for=\"description\">DESC:</label>\n                <input id=\"description\" type=\"text\" class=\"form-control\" name=\"description\" value=\"\" />\n          </div>\n        </form>\n      </div>\n    </div>\n  </div>\n\n  <!-- Search appointment section -->\n  <div class=\"container\">\n    <div class=\"row\">\n      <div id=\"searchContentDiv\">\n        <div class=\"col-md-4\">\n          <div class=\"form-group\">\n            <label for=\"usr\">Search:</label> <input id=\"searchText\" type=\"text\" class=\"form-control\" />\n          </div>\n        </div>\n        <div id=\"searchButtonDiv\" class=\"col-md-4\">\n          <span class=\"pull-left\"><button id=\"searchButton\" type=\"button\" class=\"btn btn-info\">Search</button> </span>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Appointment table section -->\n  <div class=\"container\">\n    <div id=\"appointmentTable\"></div>\n  </div>\n\n</body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "getAppointments without search string",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/getAppointments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAppointments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAppointments with search string",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/appointments?searchString=\"Description\"",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"appointments"
+					],
+					"query": [
+						{
+							"key": "searchString",
+							"value": "\"Description\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAppointments with empty search string",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/appointments?searchString=\"Description\"",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"appointments"
+					],
+					"query": [
+						{
+							"key": "searchString",
+							"value": "\"Description\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAppointments with search string with multiple spaces",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/appointments?searchString=\"  \"",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"appointments"
+					],
+					"query": [
+						{
+							"key": "searchString",
+							"value": "\"  \""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
